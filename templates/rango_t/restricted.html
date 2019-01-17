@@ -1,0 +1,13 @@
+{% extends 'rango_t/base.html' %}
+{% block title_block %}
+Restricted
+{% endblock %}
+{% block body_block %}
+{% if user.is_authenticated %}
+You are an authentic user therefor u can read this message
+{% else %}
+You ae not an authentic user.The message is hidden.
+{% endif %}
+<a href="/" style="color: blue">index</a>
+
+{% endblock %} 
