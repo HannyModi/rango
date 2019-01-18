@@ -20,6 +20,8 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 
+#for registration
+
 
 
 # print(TEMPLATE_DIR)
@@ -44,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rango'
+    'rango',
+    'registration'
 ]
 
 MIDDLEWARE = [
@@ -89,6 +92,7 @@ DATABASES = {
     }
 }
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True,
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -138,4 +142,10 @@ PASSWORD_HASHERS = [
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-LOGIN_URL = '/rango/login/'
+REGISTRATION_OPEN=True
+ACCOUNT_ACTIVATION_DAYS=7
+#REGISTRATION_AUTO_LOGIN=True
+LOGIN_REDIRECT_URL='/rango/'
+LOGIN_URL='/accounts/login/'
+
+#LOGIN_URL = '/rango/login/'

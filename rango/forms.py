@@ -14,7 +14,6 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('name',)
 
-
 class PageForm(forms.ModelForm):
     title = forms.CharField(
         max_length=128, help_text="Please enter the title of the page.")
@@ -49,4 +48,23 @@ class UserProfileForm(forms.ModelForm):
         fields=('website','picture')
         #fields:"__all__"
 
-    
+class update_category(forms.ModelForm):
+
+    name = forms.CharField(max_length=128, help_text="Please enter Category name",initial='name')
+    views = forms.IntegerField(help_text="Views",initial='views')
+    likes = forms.IntegerField(initial='likes',help_text='Like')
+    slug = forms.CharField(widget=forms.HiddenInput(), required=False)
+
+    class Meta:
+        model = Category
+        fields = ('name','views','likes',)
+
+class update_pageForm(forms.ModelForm):
+   # pid=forms.IntegerField(widget=forms.HiddenInput(),required=False)
+    title=forms.CharField(max_length=128, help_text="Page Title:",initial='title')
+    views=forms.IntegerField(help_text="Views:",initial='views') 
+    url=forms.URLField(help_text="Enter Url:",initial='url')
+    class Meta:
+        model=Page
+        fields=('title','url','views',)
+

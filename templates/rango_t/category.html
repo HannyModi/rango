@@ -13,8 +13,11 @@
         {% if pages %}
         <ul>
             {% for page in pages %}
-            <li><a href="{{ page.url }}" style="color:blue">{{ page.title }}</a></li>
+            <li><a href="{{ page.url }}" style="color:blue">{{ page.title }}</a> <a href="{% url 'update_page' page.id %}" style="color: crimson">Update</a></li>
             {% endfor %}
+
+
+
         </ul>
         {% else %}
         <strong>No Pages Currently in category.</strong>
@@ -23,6 +26,7 @@
         The specific category does not exist!
         {% endif %}
     </div>
+    <a href="{% url 'update_category' category.slug  %}">Update Category</a><br/>
     <a href="{% url 'add_page' category.slug%}" style="color:blue">Add a New Page</a><br />
     <!-- <a href="/rango/{{ category.slug }}/add_page/" style="color:blue">Add a New Page</a><br />    -->
     <!-- <a href="/" style="color:blue">Home Page</a> -->

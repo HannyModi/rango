@@ -1,0 +1,28 @@
+{% extends 'rango_t/base.html' %}
+{% load staticfiles%}
+{% block title_block%}
+    <title>Update Page</title>
+{% endblock%}
+
+{% block body_block %}
+
+    <h1>Update Page</h1>
+    <div>
+        <form id="pageedit_form" method="POST" action="">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields  %}
+                {{ hidden }}
+                
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}  
+                
+            {% endfor %}
+        
+<br/>
+            <input type="submit" name="submit" value="Update Page"/>
+        </form>
+    </div>
+{% endblock %}
