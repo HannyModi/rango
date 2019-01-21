@@ -1,7 +1,7 @@
-{% extends 'rango_t/base.html' %}
+{% extends 'rango_t/base_bootstrap.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    <title>About</title>
+  About
 {% endblock %}
 {% block body_block%}
     Hello
@@ -13,5 +13,5 @@ visits:{{visits}}
         This project has been put togather by <b>{{ MyName }}</b>
         <p><img src="{% static "images/space.jpg" %}"/></p>
     </div>
-    <a href="/" style="color:blue">Home Page</a>
+    <a href="{% url 'index' %}" >Home Page</a>
 {% endblock %}

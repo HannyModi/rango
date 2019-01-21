@@ -1,4 +1,4 @@
-{% extends 'rango_t/base.html' %}
+{% extends 'rango_t/base_bootstrap.html' %}
 {% load staticfiles%}
 {% block title_block%}
     <title>Update Page</title>
@@ -17,12 +17,12 @@
             {% for field in form.visible_fields %}
                 {{ field.errors }}
                 {{ field.help_text }}
-                {{ field }}  
+                {{ field }}  <br/><br>
                 
             {% endfor %}
         
 <br/>
-            <input type="submit" name="submit" value="Update Page"/>
-        </form>
+<button class="btn btn-success" type="submit" value="Submit" />Update Page</button>
+</form>
     </div>
 {% endblock %}

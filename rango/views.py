@@ -22,7 +22,7 @@ def visitor_cookie_handler(request):
     last_visit_cookie = get_server_side_cookie(request,'last_visit', str(datetime.now()))
     last_visited_time = datetime.strptime(
         last_visit_cookie[:-7], '%Y-%m-%d %H:%M:%S')        
-    if(datetime.now() - last_visited_time).seconds/3600 >= 1:
+    if(datetime.now() - last_visited_time).days > 0:
         visits = visits+1
         request.session['last_visit']= str(datetime.now())
     else:
@@ -79,7 +79,7 @@ def add_category(request):
                 print(form.errors)
         else:
             print(form.errors)
-    return render(request, 'rango_t/add_category.html', {'form': form})
+    return render(request, 'rango_t/add_category.html', context={'form': form})
 
 
 @login_required

@@ -1,9 +1,9 @@
 {% for c in cats %}
     {% if c == act_cat %}
-<li> <strong>
-<a href="{% url 'show_category' c.slug %}" style="color: blue">{{ c.name }}</a> </strong>
+    <li type="square" class="nav-item"> <strong>
+<a href="{% url 'show_category' c.slug %}" class="nav-link">{{ c.name }}</a> </strong>
 </li> {% else %}
-<li>
-<a href="{% url 'show_category' c.slug %}" style="color: blue">{{ c.name }}</a>
+<li type="square" class="nav-item">
+<a href="{% url 'show_category' c.slug %}" class="nav-link" >{{ c.name }}</a>
 </li> {% endif %}
 {% endfor %}

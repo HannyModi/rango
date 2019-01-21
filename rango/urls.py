@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from rango import views
 urlpatterns = [
     re_path('^$', views.index, name='index'),
+    
     re_path('^about/$',views.about, name='about'),
     re_path('^add_category/$',views.add_category, name='add_category'),    
     re_path('^(?P<category_name_slug>[\w\-]+)/add_page/$',views.add_page, name='add_page'),
