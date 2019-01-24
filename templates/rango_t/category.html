@@ -1,31 +1,68 @@
-
 {% extends 'rango_t/base_bootstrap.html' %}
 {% load staticfiles %}
 {% block title_block %}
-    {{ category.name }}
+{{ category.name }}
 {% endblock %}
 
 {% block body_block%}
 
-    <div>
-        {% if category %}
-        <h1>{{ category.name }}</h1>
-        {% if pages %}
-        <ul>
-            {% for page in pages %}
-            <li><a href="{{ page.url }}" >{{ page.title }}</a> | <a href="{% url 'update_page' page.id %}" >Update</a></li>
-            {% endfor %}
+<div>
+    {% if category %}
+    <h1>{{ category.name }}</h1>
+    {% if pages %}
+    <ul>
+        {% for page in pages %}
+        <li><a href="{% url 'goto' page.id %}">{{ page.title }}</a><span class="badge badge-pill badge-primary">{{page.views}}</span>
+            | <a href="{% url 'update_page' page.id %}">Update</a></li>
+        {% endfor %}
 
-        </ul>
-        {% else %}
-        <strong>No Pages Currently in category.</strong>
-        {% endif %}
-        {% else %}
-        The specific category does not exist!
-        {% endif %}
-    </div>
-    <a href="{% url 'update_category' category.slug  %}">Update Category</a><br/>
-    <a href="{% url 'add_page' category.slug %}" >Add a New Page</a><br />
+    </ul>
+    {% else %}
+    <strong>No Pages Currently in category.</strong>
+    {% endif %}
+    {% else %}
+    The specific category does not exist!
+    {% endif %}
+
+    <a href="{% url 'update_category' category.slug  %}">Update Category</a><br />
+    <a href="{% url 'add_page' category.slug %}">Add a New Page</a><br />
     <!-- <a href="/rango/{{ category.slug }}/add_page/" style="color:blue">Add a New Page</a><br />    -->
     <!-- <a href="/" style="color:blue">Home Page</a> -->
+  
+<hr>
+    {% if user.is_authenticated %}
+    <div id="search">
+
+        <form class="form-inline" id="user_form" method="POST" action="{% url 'show_category' category.slug %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" type="text" size="50" name="query" value="{% if query %} {{query}} {% endif %}"
+                    id="query" />
+            </div>
+            <br />
+            <button class="btn btn-success" type="submit" name="submit" value="Search">Search</button>
+        </form>
+        <br/>
+        <hr>
+        <br />
+        <div>
+            {% if result_list %}
+            <h2>Results</h2>
+            <div class="list_group">
+                {% for result in result_list %}
+                <div class="list-group-item">
+                    <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a>
+                    </h4>
+                    <p class="list-group-item-text">{{ result.summary }}</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+
+</div>
+
 {% endblock %}

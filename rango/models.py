@@ -29,6 +29,7 @@ class Page(models.Model):
 
     def __str__(self):  # For Python 2, use __unicode__ too
         return self.title
+        
 class User_Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,)
     website=models.URLField(blank=True)
@@ -36,4 +37,5 @@ class User_Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
+

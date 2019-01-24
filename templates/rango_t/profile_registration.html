@@ -1,0 +1,21 @@
+{% extends 'rango_t/base_bootstrap.html' %}
+{% block title %}
+Additional Information
+{% endblock %}
+{% block body_block%}
+<h1> Additional Information </h1>
+<form id="registration" enctype="multipart/form-data" method="POST" action=".">
+    {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}<br/><br/>
+        {% endfor %}
+    <button class="btn btn-success" type="submit" name="submit" value="Search">Submit</button>
+
+</form>
+
+{% endblock %}

@@ -43,6 +43,9 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     #something field
+    website=forms.URLField(max_length=200, help_text="Please enter the URL of your website.", required=False)
+    picture=forms.ImageField(max_length=200)
+
     class Meta:
         model=User_Profile
         fields=('website','picture')
@@ -67,4 +70,5 @@ class update_pageForm(forms.ModelForm):
     class Meta:
         model=Page
         fields=('title','url','views',)
+
 

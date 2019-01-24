@@ -12,6 +12,18 @@ visits:{{visits}}
     <div>
         This project has been put togather by <b>{{ MyName }}</b>
         <p><img src="{% static "images/space.jpg" %}"/></p>
+
+        <p class="ouch">Button From JavaScript 
+            <button class="btn btn-primary" onClick="alert('You clicked the button using JavaScript.');"> 
+            Click Me - I run JavaScript
+            </button>
+        </p>
+        <p class="ouch">Button From JQuery
+                <button  id="about-btn"> 
+                    Click Me - I'm JavaScript on Speed
+                </button>
+        </p>
     </div>
+    <div id="msg">Hello - I'm here for a JQuery Example too</div><br/><br/>
     <a href="{% url 'index' %}" >Home Page</a>
 {% endblock %}
