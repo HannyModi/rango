@@ -35,7 +35,14 @@ def populate():
          "views":25} ]
     cats = {"Python": {"pages": python_pages, "like":64, "view":128},
             "Django": {"pages": django_pages, "like":32, "view":64 },
-            "Other Frameworks": {"pages": other_pages, "like":16, "view":32}
+            "Other Frameworks": {"pages": other_pages, "like":16, "view":32},
+            "Pascal":{"pages":{},"like":1,"view":2},
+            "Pearl":{"pages":{},"like":3,"view":3},
+            "PHP":{"pages":{},"like":12,"view":23},
+            "PROLog":{"pages":{},"like":41,"view":22},
+            "PostScript":{"pages":{},"like":8,"view":12},
+            "Programming":{"pages":{},"like":6,"view":8},
+
              }
 
     for cat, cat_data in cats.items():

@@ -1,0 +1,10 @@
+{% if pages %}
+<ul>
+    {% for page in pages %}
+    <li><a href="{% url 'goto' page.id %}">{{ page.title }}</a><span class="badge badge-pill badge-primary">{{page.views}}</span>
+        | <a href="{% url 'update_page' page.id %}">Update</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<strong>No pages currently in category.</strong>
+{% endif %}

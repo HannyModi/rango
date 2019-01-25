@@ -18,6 +18,10 @@ urlpatterns = [
     re_path('^logout/$', views.user_logout, name='logout'),
     re_path('^Add_Details/$',views.register_details,name='register_details'),
     re_path('^View_Profile/(?P<username>[\w\-]+)/$',views.view_profile,name='view_profile'),
+    re_path('^like/$',views.add_like,name='add_like'),
     re_path('^List_Profile/$',views.list_user,name='list_user'),
+    re_path('^suggest/$',views.suggest_category,name='suggest_category'),
+    re_path('^add/$',views.auto_add_page,name="auto_add_page"),
+
 
 ] 

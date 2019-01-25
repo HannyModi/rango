@@ -77,7 +77,7 @@ def show_category(request, category_name_slug):
         if request.method == 'GET':
             category.views = category.views + 1
             category.save()
-            form = update_cat(request.POST, category)
+            # form = update_cat(request.POST, category)
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
         context_dict['pages'] = pages
@@ -232,7 +232,7 @@ def track_url(request, pid):
     if request.method == 'GET':
         page.views = page.views + 1
         page.save()
-        form = update_pageForm(request.POST, page)
+        # form = update_pageForm(request.POST, page)
     return redirect(page.url)
 
 
@@ -279,3 +279,52 @@ def view_profile(request,username):
 def list_user(request):
     userlist=User_Profile.objects.all()
     return render(request,'rango_t/list_profile.html',{'userprofile_list':userlist})
+
+@login_required
+def add_like(request):
+    catid=None
+    if request.method == 'GET':
+        catid=request.GET['category_id']
+        print('catid -',catid)
+        likes=0
+        if catid:
+            cat=Category.objects.get(id=int(catid))
+            if cat:
+                likes=cat.like+1
+                cat.like=likes
+                cat.save()
+    return HttpResponse(likes)
+
+def get_category_list(max_result=0,starts_with=''):
+    cat_list=[]
+    if starts_with:
+        cat_list=Category.objects.filter(name__istartswith=starts_with)
+    if max_result>0:
+        if len(cat_list)>max_result:
+            cat_list=cat_list[:max_result]
+    return cat_list
+
+def suggest_category(request):
+    cat_list=[]
+    starts_with=''
+    if request.method == 'GET':
+        starts_with=request.GET['suggestion']
+    cat_list=get_category_list(8,starts_with)
+    return render(request,'rango_t/cats.html',{'cats':cat_list})
+
+def auto_add_page(request):
+    cat_id=None
+    title=None
+    url=None
+    context_dict={}
+    if request.method== 'GET':
+        cat_id=request.GET['categoryid']
+        title=request.GET['title']
+        url=request.GET['url']
+        if cat_id:
+            cat=Category.objects.get(id=int(cat_id))
+            p=Page.objects.get_or_create(category=cat,title=title,url=url)
+            pages=Page.objects.filter(category=cat).order_by('-views')
+            context_dict['pages']=pages
+    return render(request,'rango_t/page_list.html',context_dict)
+    

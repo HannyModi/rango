@@ -7,29 +7,40 @@
 {% block body_block%}
 
 <div>
+
     {% if category %}
     <h1>{{ category.name }}</h1>
-    {% if pages %}
-    <ul>
-        {% for page in pages %}
-        <li><a href="{% url 'goto' page.id %}">{{ page.title }}</a><span class="badge badge-pill badge-primary">{{page.views}}</span>
-            | <a href="{% url 'update_page' page.id %}">Update</a></li>
-        {% endfor %}
+    <div id="pages">
+        {% if pages %}
+        <ul>
+            {% for page in pages %}
+            <li><a href="{% url 'goto' page.id %}">{{ page.title }}</a><span class="badge badge-pill badge-primary">{{page.views}}</span>
+                | <a href="{% url 'update_page' page.id %}">Update</a></li>
+            {% endfor %}
 
-    </ul>
-    {% else %}
-    <strong>No Pages Currently in category.</strong>
-    {% endif %}
+        </ul>
+        {% else %}
+        <strong>No Pages Currently in category.</strong>
+        {% endif %}
+    </div>
     {% else %}
     The specific category does not exist!
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    Total Likes: <strong id="like_count">{{ category.like }}</strong>
+    <button type="button" id="likes" data-catid="{{ category.id }}" class="btn btn-info btn-sm">
+        Like
+    </button>
+    <br /><br />
     {% endif %}
 
     <a href="{% url 'update_category' category.slug  %}">Update Category</a><br />
     <a href="{% url 'add_page' category.slug %}">Add a New Page</a><br />
     <!-- <a href="/rango/{{ category.slug }}/add_page/" style="color:blue">Add a New Page</a><br />    -->
     <!-- <a href="/" style="color:blue">Home Page</a> -->
-  
-<hr>
+
+    <hr>
     {% if user.is_authenticated %}
     <div id="search">
 
@@ -42,7 +53,7 @@
             <br />
             <button class="btn btn-success" type="submit" name="submit" value="Search">Search</button>
         </form>
-        <br/>
+        <br />
         <hr>
         <br />
         <div>
@@ -54,6 +65,9 @@
                     <h4 class="list-group-item-heading"><a href="{{ result.link }}">{{ result.title }}</a>
                     </h4>
                     <p class="list-group-item-text">{{ result.summary }}</p>
+                    <button type="button" class="rango-add btn btn-info btn-sm" id="AddPage" data-title="{{ result.title }}"
+                        data-url="{{ result.link }}" data-catid="{{ category.id }}" name="Add Page">Add</button>
+
                 </div>
                 {% endfor %}
             </div>
