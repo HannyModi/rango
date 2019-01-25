@@ -1,7 +1,7 @@
 import json
 import urllib
 import http.client
-import certifi
+
 
 
 def read_bing_key():
